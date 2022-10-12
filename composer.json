@@ -1,0 +1,12 @@
+{
+	"autoload": {
+		"psr-4": {
+			"Supsis\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Softcand Inc."
+		}
+	]
+}
