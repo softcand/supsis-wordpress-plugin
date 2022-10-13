@@ -23,15 +23,28 @@
  * Update URI:        https://supsis.com/plugins/wp
  */
 
-use Supsis\Supsis;
+/**
+ * Constants
+ */
+define("SUPSIS_PATH", plugin_dir_path(__FILE__));
+define("SUPSIS_URL", plugin_dir_url(__FILE__));
+define("SUPSIS", plugin_basename(__FILE__));
 
-defined("ABSPATH") or die("Hey, what are you doing here? You silly human!");
+/**
+ * Autoload import from composer.
+ */
+if (file_exists(SUPSIS_PATH . "vendor/autoload.php")) {
+    require_once SUPSIS_PATH . "vendor/autoload.php";
+}
 
-require_once plugin_dir_path(__FILE__) . "vendor/autoload.php";
-
-function supsis_initialize()
+/**
+ * Supsis initialize
+ */
+function supsis_initialize(): void
 {
-    Supsis::init();
+    if (class_exists('Supsis\\Init')) {
+        Supsis\Init::register();
+    }
 }
 
 add_action("init", "supsis_initialize");
