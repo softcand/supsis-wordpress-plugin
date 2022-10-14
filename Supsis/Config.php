@@ -7,7 +7,7 @@ namespace Supsis;
  */
 class Config
 {
-    public string $tabletUrl = "https://beta-api.supsis.live/api/public/integration/wordpress";
+    public string $tabletUrl = "https://-api.supsis.live/api/public/integration/wordpress";
     public string $widgetUrl;
     public string $domain;
     public string $username;
@@ -18,8 +18,11 @@ class Config
      */
     public function __construct()
     {
-        $this->domain = $_SERVER['SERVER_NAME'];
-        $this->username = wp_get_current_user()->nickname;
+        $domain = $_SERVER['SERVER_NAME'];
+        $domain = preg_replace("/(https?:\/\/|www.|.\w{2,4}(.\w{2})?$)/mi", "", $domain);
+        $domain = str_replace(".", "-", $domain);
+        $this->domain = $domain;
+        $this->username = wp_get_current_user()->user_nicename;
         $this->email = wp_get_current_user()->user_email;
         $this->widgetUrl = "https://$this->domain.visitor.supsis.live/static/js/loader.js";
     }
