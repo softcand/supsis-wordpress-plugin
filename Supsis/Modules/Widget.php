@@ -15,7 +15,7 @@ class Widget extends Config
      */
     public function register(): void
     {
-        add_action("wp_footer", [$this, "addBubble"]);
+        add_action("wp_enqueue_scripts", [$this, "addBubble"]);
     }
 
     /**
@@ -24,6 +24,7 @@ class Widget extends Config
      */
     function addBubble(): void
     {
-        require_once SUPSIS_PATH . "templates/bubble.php";
+        wp_enqueue_script("supsis-bubble-sync", SUPSIS_URL . "js/supsis-sync.js");
+        wp_enqueue_script("supsis-bubble", $this->widgetUrl);
     }
 }
