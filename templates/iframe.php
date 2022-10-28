@@ -11,5 +11,5 @@
 	width="100%"
 	sandbox="allow-forms allow-top-navigation allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-scripts"
 	allow="camera *;microphone *;fullscreen *; geolocation *;"
-	src="<?php echo $iframeUrl ?? ''; ?>"
+	src="<?php echo esc_url($iframeUrl) ?? ''; ?>"
 ></iframe>
